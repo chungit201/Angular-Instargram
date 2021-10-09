@@ -1,0 +1,234 @@
+/*Popup Post Status Style*/
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  padding-top: 60px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* The Close Button */
+.close {
+  color: #383838;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 2%;
+  top: 30%;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*Style Popup*/
+.container {
+  margin: auto;
+  width: 500px;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  transition: height 0.2s ease;
+}
+
+/* Slider */
+.container .wrapper {
+  display: flex;
+  width: 1000px;
+}
+.container section {
+  width: 500px;
+  background: #fff;
+}
+.container .post {
+  transition: margin-left 0.18s ease;
+}
+.container.active .post {
+  margin-left: -500px;
+}
+.container.active {
+  height: 490px;
+}
+
+/* Post */
+.post header {
+  font-size: 22px;
+  text-align: center;
+  font-weight: 600;
+  padding: 17px 0;
+  border-bottom: 1px solid #bfbfbf;
+  position: relative;
+}
+.post form {
+  margin: 20px 25px;
+}
+.post form .content_post {
+  display: flex;
+  align-items: center;
+}
+.post form .content_post img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.post form .content_post p {
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+.post form :where(textarea, button) {
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.post form textarea {
+  display: block;
+  resize: none;
+  font-size: 14px;
+  margin: 20px 0;
+  min-height: 50px;
+  width: 100%;
+  height: 50px;
+  outline: none;
+  max-height: 330px;
+}
+
+.post form :where(.options) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+form .options {
+  height: 57px;
+  border-radius: 7px;
+  padding: 0 15px;
+  margin: 15px 0;
+  border: 1px solid #b9b9b9;
+}
+form .options p {
+  color: #595959;
+  font-size: 15px;
+  font-weight: 500;
+}
+form .options :where(.list, li) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form .options .list li {
+  list-style: style none;
+  height: 42px;
+  width: 42px;
+  border-radius: 50%;
+}
+form .list li:hover {
+  background: #f0f1f4;
+}
+form .list li img {
+  cursor: pointer;
+}
+
+form button {
+  height: 53px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 7px;
+  color: #fff;
+  cursor: pointer;
+  background: #4599ff;
+  /*
+    color: #bcc0c4;
+    cursor: no-drop;
+    background: #e2e5e9;
+    */
+}
+/*End Popup Post Status Style*/
+
+/*---Upload Image Style--*/
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+.container_up_image {
+  font-family: "Poppins", sans-serif;
+  height: 350px;
+  width: 430px;
+  position: relative;
+}
+.container_up_image .wrapper_up_image {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  border-radius: 10px;
+  background: #fff;
+  border: 2px dashed #c2cdda;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.wrapper_up_image .active {
+  border: none;
+}
+.wrapper_up_image .image_upload {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper_up_image img {
+  height: 100%;
+
+  object-fit: cover;
+}
+.wrapper_up_image .icon {
+  width: 100px;
+  margin: auto;
+}
+.wrapper_up_image .text {
+  font-size: 20px;
+  font-weight: 500;
+  color: #5b5b7b;
+}
+.wrapper_up_image #cancel_up_image svg {
+  position: absolute;
+  font-size: 20px;
+  right: 15px;
+  top: 15px;
+  color: #9658fe;
+  cursor: pointer;
+  display: none;
+}
+.wrapper_up_image.active:hover #cancel_up_image svg {
+  display: block;
+}
+.wrapper_up_image #cancel_up_image svg:hover {
+  color: #e74c3c;
+}
+.wrapper_up_image .file-name {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  padding: 8px 0;
+  font-size: 18px;
+  color: #fff;
+  display: none;
+  background: linear-gradient(135deg, #3a8ffe 0%, #9658fe 100%);
+}
+.wrapper_up_image .active:hover .file-name {
+  display: block;
+}
+/*---End upload Image Style--*/

@@ -1,0 +1,19 @@
+<section>
+  <form [formGroup]="commentForm" (submit)="createComment()">
+    <div class="comment">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/ecmascript-7a6e3.appspot.com/o/images%2FFacebook-Post-master%2Fsmile.svg?alt=media&token=272f8ecb-a31c-4db7-a954-3aaca34281c7"
+        alt=""
+      />
+
+      <textarea
+        (keyup)="reSizeComment($event)"
+        spellcheck="false"
+        class="textarea_comment"
+        formControlName="content"
+        placeholder="Add a comment"
+      ></textarea>
+      <button class="btn_comment">Post</button>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,128 @@
+<!-- W3hubs.com - Download Free Responsive Website Layout Templates designed on HTML5 CSS3,Bootstrap which are 100% Mobile friendly. w3Hubs all Layouts are responsive cross browser supported, best quality world class designs. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Instagram Mobile Login Page In Bootstrap 4 - W3hubs.com</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="w3hubs.com" />
+    <meta name="author" content="w3hubs.com" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body>
+    <section id="w3hubs">
+      <div class="container">
+        <h1>Instagram</h1>
+        <form [formGroup]="userForm" (submit)="login()">
+          <div class="form-group">
+            <input
+              type="name"
+              class="form-control"
+              formControlName="email"
+              placeholder="Email"
+            />
+            <div
+              class="font-serif text-red-500 text-sm mt-2"
+              *ngIf="
+                email.email.invalid &&
+                (email.email.dirty || email.email.touched)
+              "
+            >
+              <div *ngIf="email.email.errors?.required">Email is required.</div>
+              <div *ngIf="email.email.errors?.maxlength">
+                Name limit 50 characters long.
+              </div>
+              <div *ngIf="email.email.errors?.email">
+                Email Incorrect format!
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+              placeholder="Password"
+            />
+            <div
+              class="font-serif text-red-500 text-sm mt-2"
+              *ngIf="
+                password.password.invalid &&
+                (password.password.dirty || password.password.touched)
+              "
+            >
+              <div *ngIf="password.password.errors?.required">
+                password is required.
+              </div>
+              <div *ngIf="password.password.errors?.maxlength">
+                Name limit 50 characters long.
+              </div>
+              <div *ngIf="password.password.errors?.minlength">
+                Name must be at least 7 characters long.
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="errors"
+            class="font-serif text-center text-red-500 text-sm mb-3"
+          >
+            {{ errors }}
+          </div>
+          <div class="form-group" style="display: flex">
+            <button
+              [disabled]="!userForm.valid"
+              type="submit"
+              style="margin-right: 5px"
+              class="btn btn-primary"
+            >
+              Login
+            </button>
+            <a routerLink="/register">
+              <button
+                type="button"
+                style="margin-left: 5px"
+                class="btn btn-secondary"
+              >
+                Sign Up
+              </button></a
+            >
+          </div>
+        </form>
+        <h4>OR</h4>
+        <p class="flex items-center justify-between w-96 mx-auto">
+          <a class="flex items-center" href="#">
+            <i class="fa fa-facebook-square"></i>
+            Log In Facebook
+          </a>
+          <a class="flex items-center" href="#">
+            <i class="fa fa-lock"></i>
+            Forget Password
+          </a>
+        </p>
+      </div>
+    </section>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-125951040-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-125951040-1");
+    </script>
+  </body>
+</html>
