@@ -14,9 +14,17 @@ const routes: Routes = [
     path: '',
     component: ClientComponent,
     children: [
-      { path: '', component: MainComponent },
-      { path: 'messenger', component: MessengerComponent },
-      { path: 'profile/:id', component: UserProfileComponent },
+      { path: '', component: MainComponent, canActivate: [GuardService] },
+      {
+        path: 'messenger',
+        component: MessengerComponent,
+        canActivate: [GuardService],
+      },
+      {
+        path: 'profile/:id',
+        component: UserProfileComponent,
+        canActivate: [GuardService],
+      },
     ],
     canActivate: [GuardService],
   },
