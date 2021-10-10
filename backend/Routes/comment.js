@@ -11,7 +11,7 @@ import {
 } from '../Middleware/authenToken'
 const router = express.Router();
 
-router.get('/comment', listComment);
+router.get('/comment', authToken, listComment);
 // router.get('/comment/:commentID', ); bảo trì chưa hoàn thiện
 router.post('/comment/create', authToken, addComment);
 router.put('/comment/update/:commentID', authToken, updateComment);

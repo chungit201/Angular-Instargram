@@ -21,7 +21,7 @@ export const listStatus = (req, res) => {
 
 // Lấy id của bài post
 export const statusID = (req, res, next, id) => {
-  Status.findById(id).populate('user like comment', 'name amount user content')
+  Status.findById(id).populate('user like comment', 'name amount user content avatar')
     .exec((err, status) => {
       if (err || !status) {
         res.status(400).json({

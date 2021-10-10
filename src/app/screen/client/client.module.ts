@@ -27,6 +27,7 @@ import { Page404Component } from '../page404/page404.component';
 import { GetShotTextPipe } from 'src/app/pipes/get-shot-text.pipe';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { PostdetailComponent } from '../main/posts/postdetail/postdetail.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
 
@@ -65,6 +66,7 @@ export function jwtOptionsFactory() {
     LogoutComponent,
     UserProfileComponent,
     Page404Component,
+    PostdetailComponent,
   ],
   imports: [
     CommonModule,

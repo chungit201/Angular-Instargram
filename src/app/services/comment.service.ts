@@ -11,6 +11,13 @@ import { AuthService } from './auth.service';
 export class CommentService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+  public getComment(id: string): Observable<CommentModel[]> {
+    const url = `${environment.api}/comment?post=${id}`;
+    return this.http.get<CommentModel[]>(url, {
+      headers: this.authService.getHeader(),
+    });
+  }
+
   public createComment(data: CommentModel[]): Observable<CommentModel[]> {
     const url = `${environment.api}/comment/create`;
     return this.http.post<CommentModel[]>(url, data[0], {

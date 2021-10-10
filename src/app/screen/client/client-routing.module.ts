@@ -25,6 +25,11 @@ const routes: Routes = [
         component: UserProfileComponent,
         canActivate: [GuardService],
       },
+      {
+        path: 'post/:id',
+        component: MainComponent,
+        canActivate: [GuardService],
+      },
     ],
     canActivate: [GuardService],
   },

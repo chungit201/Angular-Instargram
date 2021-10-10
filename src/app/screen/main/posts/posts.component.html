@@ -43,7 +43,7 @@
         <div class="post__buttons">
           <app-like [itemPost]="post"></app-like>
 
-          <button (click)="openCommentDetail()" class="post__button">
+          <button (click)="openCommentDetail(post._id)" class="post__button">
             <svg
               width="24"
               height="24"
@@ -63,173 +63,7 @@
           </button>
 
           <!-- Popup Comment Detail -->
-          <div id="commentDetailPost" class="modal">
-            <!-- Modal content -->
-            <article class="commentDetail">
-              <div class="post__content">
-                <div class="post__medias">
-                  <div class="post__media bg-gray-100">
-                    <img
-                      style="object-fit: contain; margin: auto; height: 100%"
-                      src="https://picsum.photos/200"
-                      alt="Post Content"
-                    />
-                  </div>
-                </div>
 
-                <div class="commentDetail__footer">
-                  <header>
-                    <svg
-                      class="closePopupComment"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </header>
-                  <div style="margin-bottom: 20px" class="post__profile">
-                    <a href="#" class="post__avatar">
-                      <img src="assets/default-user.png" alt="User Picture" />
-                    </a>
-                    <a href="#" class="post__user">usernick1</a>
-                  </div>
-
-                  <div class="post__infos max-h-96">
-                    <div class="overflow-auto">
-                      <div class="post__description flex flex-col">
-                        <span>
-                          <a class="post__name--underline" href="#"
-                            >usernick1</a
-                          >
-                          Multiple media post example. This post has three
-                          images!
-                        </span>
-                        <span class="post__date-time">1 hour ago</span>
-                      </div>
-
-                      <div class="post__description flex flex-col">
-                        <span>
-                          <a class="post__name--underline" href="#"
-                            >usernick2</a
-                          >
-                          Multiple media post example
-                        </span>
-                        <span class="post__date-time">1 hour ago</span>
-                      </div>
-
-                      <div class="post__description flex flex-col">
-                        <span>
-                          <a class="post__name--underline" href="#"
-                            >usernick2</a
-                          >
-                          Multiple media post example
-                        </span>
-                        <span class="post__date-time">1 hour ago</span>
-                      </div>
-
-                      <div class="post__description flex flex-col">
-                        <span>
-                          <a class="post__name--underline" href="#"
-                            >usernick2</a
-                          >
-                          Multiple media post example
-                        </span>
-                        <span class="post__date-time">1 hour ago</span>
-                      </div>
-
-                      <div class="post__description flex flex-col">
-                        <span>
-                          <a class="post__name--underline" href="#"
-                            >usernick2</a
-                          >
-                          Multiple media post example
-                        </span>
-                        <span class="post__date-time">1 hour ago</span>
-                      </div>
-                      <div class="post__description flex flex-col">
-                        <span>
-                          <a class="post__name--underline" href="#"
-                            >usernick2</a
-                          >
-                          Multiple media post example
-                        </span>
-                        <span class="post__date-time">1 hour ago</span>
-                      </div>
-                      <div class="post__description flex flex-col">
-                        <span>
-                          <a class="post__name--underline" href="#"
-                            >usernick2</a
-                          >
-                          Multiple media post example
-                        </span>
-                        <span class="post__date-time">1 hour ago</span>
-                      </div>
-                      <div class="post__description flex flex-col">
-                        <span>
-                          <a class="post__name--underline" href="#"
-                            >usernick2</a
-                          >
-                          Multiple media post example
-                        </span>
-                        <span class="post__date-time">1 hour ago</span>
-                      </div>
-                      <div class="post__description flex flex-col">
-                        <span>
-                          <a class="post__name--underline" href="#"
-                            >usernick2</a
-                          >
-                          Multiple media post example
-                        </span>
-                        <span class="post__date-time">1 hour ago</span>
-                      </div>
-                      <div class="post__description flex flex-col">
-                        <span>
-                          <a class="post__name--underline" href="#"
-                            >usernick2</a
-                          >
-                          Multiple media post example
-                        </span>
-                        <span class="post__date-time">1 hour ago</span>
-                      </div>
-                    </div>
-
-                    <div class="post__likes mt-4">
-                      <a href="#" class="post__likes-avatar">
-                        <img src="assets/default-user.png" alt="User Picture" />
-                      </a>
-
-                      <span
-                        >Liked by
-                        <a class="post__name--underline" href="#">user123</a>
-                        and <a href="#">73 others</a></span
-                      >
-                    </div>
-
-                    <div class="comment">
-                      <img
-                        src="https://firebasestorage.googleapis.com/v0/b/ecmascript-7a6e3.appspot.com/o/images%2FFacebook-Post-master%2Fsmile.svg?alt=media&token=272f8ecb-a31c-4db7-a954-3aaca34281c7"
-                        alt=""
-                      />
-                      <textarea
-                        (keyup)="reSizeComment($event)"
-                        spellcheck="false"
-                        class="textarea_comment"
-                        placeholder="Viết bình luận"
-                      ></textarea>
-                      <button class="btn_comment">Đăng</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
           <!-- End Popup Comment Detail -->
 
           <button class="post__button">
@@ -302,5 +136,6 @@
     </article>
   </section>
 </div>
+<app-postDetail></app-postDetail>
 <!-- <app-side-bar-menu></app-side-bar-menu> -->
 <app-footer></app-footer>

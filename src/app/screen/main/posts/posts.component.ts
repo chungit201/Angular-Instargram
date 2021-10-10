@@ -5,6 +5,7 @@ import { PostService } from '../../../services/post.service';
 import { PostModel } from 'src/app/model/post-model';
 import { UserService } from '../../../services/user.service';
 import { FriendModel } from 'src/app/model/friend-model';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -19,7 +20,8 @@ export class PostsComponent implements OnInit {
   constructor(
     private postService: PostService,
     private userService: UserService,
-    private friendService: FriendService
+    private friendService: FriendService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -202,29 +204,17 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  //Resize input comment
-  reSizeComment(event: any) {
-    const textarea: any = document.querySelector('.textarea_comment');
-    textarea.style.height = '21px';
-    let scHeight = event.target.scrollHeight;
-    textarea.style.height = `${scHeight}px`;
-  }
-
   //Open Post Form
-  openCommentDetail() {
+  openCommentDetail(id: any) {
     let modal: any = document.getElementById('commentDetailPost');
-    let close: any = document.getElementsByClassName('closePopupComment')[0];
 
     modal.style.display = 'block';
-
-    close.onclick = function () {
-      modal.style.display = 'none';
-    };
 
     window.onclick = function (event) {
       if (event.target == modal) {
         modal.style.display = 'none';
       }
     };
+    this.router.navigate([`/post/${id}`]);
   }
 }

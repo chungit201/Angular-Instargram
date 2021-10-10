@@ -1,6 +1,3 @@
-import {
-  comment
-} from '../Model/commentModel';
 import Comments from '../Model/commentModel';
 
 export const addComment = (req, res) => {
@@ -49,19 +46,22 @@ export const updateComment = (req, res) => {
 }
 
 export const listComment = (req, res) => {
-  let status = req.query.status ? req.query.status : ''
-  comment.find({
-    "status": new RegExp(status)
-  }).exec((err, comment) => {
+  let post = req.query.post ? req.query.post : ''
+  const ObjectId = require('mongodb').ObjectId;
+  const id = new ObjectId(post)
+  Comments.find({
+    "status": id
+  }).populate('user ', 'name avatar').exec((err, comment) => {
     if (err) {
       return res.status(400).json({
         err,
         error: "Comment does not exist"
       })
-      res.json({
-        comment
-      })
+
     }
+    res.json({
+      comment
+    })
   })
 }
 

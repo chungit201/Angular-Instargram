@@ -1,0 +1,105 @@
+<div id="commentDetailPost" class="modal">
+  <!-- Modal content -->
+  <article class="commentDetail" *ngIf="postItem">
+    <div class="post__content">
+      <div class="post__medias">
+        <div class="post__media bg-gray-100">
+          <img
+            style="object-fit: contain; margin: auto; height: 100%"
+            src="{{ postItem.photo }}"
+            alt="Post Content"
+          />
+        </div>
+      </div>
+
+      <div class="commentDetail__footer">
+        <header>
+          <svg
+            class="closePopupComment"
+            (click)="closeDialog()"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </header>
+        <div style="margin-bottom: 20px" class="post__profile">
+          <a href="#" class="post__avatar">
+            <img
+              *ngIf="!postItem.user.avatar"
+              src="assets/default-user.png"
+              alt="User Picture"
+            />
+            <img
+              *ngIf="postItem.user.avatar"
+              src="{{ postItem.user.avatar }}"
+              alt="User Picture"
+            />
+          </a>
+          <a routerLink="/profile/{{ postItem.user._id }}" class="post__user">{{
+            postItem.user.name
+          }}</a>
+        </div>
+
+        <div class="post__infos max-h-96">
+          <div class="overflow-auto">
+            <div
+              class="post__description flex flex-col"
+              *ngFor="let comment of comments"
+            >
+              <span>
+                <a
+                  class="post__name--underline"
+                  routerLink="/profile/{{ comment.user._id }}"
+                  >{{ comment.user.name }}</a
+                >
+                {{ comment.content }}
+              </span>
+              <span class="post__date-time">{{
+                comment.createdAt | timeDistance
+              }}</span>
+            </div>
+          </div>
+
+          <div class="post__likes mt-4">
+            <a href="#" class="post__likes-avatar">
+              <img src="assets/default-user.png" alt="User Picture" />
+            </a>
+
+            <span
+              >Liked by
+              <a class="post__name--underline" href="#">user123</a>
+              and <a href="#">73 others</a></span
+            >
+          </div>
+          <section>
+            <form [formGroup]="commentForm" (submit)="createComment()">
+              <div class="comment">
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/ecmascript-7a6e3.appspot.com/o/images%2FFacebook-Post-master%2Fsmile.svg?alt=media&token=272f8ecb-a31c-4db7-a954-3aaca34281c7"
+                  alt=""
+                />
+
+                <textarea
+                  (keyup)="reSizeComment($event)"
+                  spellcheck="false"
+                  class="textarea_comment"
+                  formControlName="content"
+                  placeholder="Add a comment"
+                ></textarea>
+                <button class="btn_comment">Post</button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
