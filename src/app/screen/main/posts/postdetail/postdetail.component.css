@@ -505,6 +505,7 @@ img {
 }
 .post__likes,
 .post__description {
+  margin-right: 10px;
   margin-bottom: 10px;
   display: flex;
 }
@@ -900,12 +901,6 @@ h1 {
   font-size: 110px;
 }
 
-form {
-  width: 50%;
-  margin: 0 auto;
-  display: block;
-  padding: 20px;
-}
 .btn {
   display: block;
   width: 100%;
