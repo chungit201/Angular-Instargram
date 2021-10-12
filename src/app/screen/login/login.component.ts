@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
       (data: any) => {
         this.userService.setToken(data.token);
         this.userService.setID(data.user._id);
-
         this.router.navigate(['/']);
       },
       (err: any) => {
