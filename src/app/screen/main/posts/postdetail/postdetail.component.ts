@@ -72,7 +72,7 @@ export class PostdetailComponent implements OnInit {
   }
 
   reSizeComment(event: any) {
-    const textarea: any = document.querySelector('.textarea_comment');
+    const textarea: any = document.querySelector('.textarea_comment_detail');
     textarea.style.height = '21px';
     let scHeight = event.target.scrollHeight;
     textarea.style.height = `${scHeight}px`;
