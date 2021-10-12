@@ -29,6 +29,7 @@ import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { PostdetailComponent } from '../main/posts/postdetail/postdetail.component';
 import { LoadingComponent } from '../loading/loading.component';
+import { LikeByUserComponent } from '../main/posts/like-by-user/like-by-user.component';
 
 const config: SocketIoConfig = {
   url: 'http://localhost:7000',
@@ -72,6 +73,7 @@ export function jwtOptionsFactory() {
     Page404Component,
     PostdetailComponent,
     LoadingComponent,
+    LikeByUserComponent,
   ],
   imports: [
     CommonModule,

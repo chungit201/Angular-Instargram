@@ -7,7 +7,11 @@
           <a href="#" class="post__avatar">
             <img src="assets/default-user.png" alt="User Picture" />
           </a>
-          <a class="post__user" *ngIf="posts != undefined">
+          <a
+            class="post__user"
+            routerLink="/profile/{{ post.user._id }}"
+            *ngIf="posts != undefined"
+          >
             {{ post.user.name }}
           </a>
         </div>
@@ -111,11 +115,7 @@
               <img src="assets/default-user.png" alt="User Picture" />
             </a>
 
-            <span>
-              Liked by<span class="post__name--underline cursor-pointer"
-                >user123</span
-              >
-            </span>
+            <app-like-by-user [itemPost]="post"></app-like-by-user>
           </div>
 
           <div class="post__description flex flex-col">

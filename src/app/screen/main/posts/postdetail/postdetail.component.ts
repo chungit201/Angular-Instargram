@@ -35,6 +35,7 @@ export class PostdetailComponent implements OnChanges, OnInit {
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
     let { itemDetail } = changes;
     this.id = itemDetail.currentValue;
     this.postDetailItem();
