@@ -1,37 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
+import { Observable } from 'rxjs';
 import { SocketIo } from '../model/socket-model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SocketService {
-  currentDocument = this.socket.fromEvent<Document>('document');
-  documents = this.socket.fromEvent<string[]>('documents');
-
   constructor(private socket: Socket) {}
-
-  getDocument(id: string) {
-    this.socket.emit('getDoc', id);
+  public senMessage(message: string) {
+    this.socket.emit('new message', message);
   }
 
-  newDocument() {
-    this.socket.emit('addDoc', { id: this.docId(), doc: '' });
-  }
-
-  editDocument(document: Document) {
-    this.socket.emit('editDoc', document);
-  }
-
-  private docId() {
-    let text = '';
-    const possible =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-    for (let i = 0; i < 5; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-
-    return text;
+  public getMessage() {
+    return Observable.create((observer: any) => {
+      this.socket.on('new message', (message: string) => {
+        observer.next(message);
+      });
+    });
   }
 }
