@@ -1,22 +1,29 @@
 import { Injectable } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { io } from 'socket.io-client';
 import { SocketIo } from '../model/socket-model';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class SocketService {
-  constructor(private socket: Socket) {}
-  public senMessage(message: string) {
-    this.socket.emit('new message', message);
-  }
+  public message$: BehaviorSubject<string> = new BehaviorSubject('');
+  constructor() {}
 
-  public getMessage() {
-    return Observable.create((observer: any) => {
-      this.socket.on('new message', (message: string) => {
-        observer.next(message);
-      });
+  socket = io(environment.urlSocket);
+
+  public sendMessage(user: string, content: string) {
+    this.socket.emit('message', {
+      user,
+      content,
     });
   }
+
+  public getNewMessage = () => {
+    this.socket.on('message', (message) => {
+      this.message$.next(message);
+    });
+
+    return this.message$.asObservable();
+  };
 }
