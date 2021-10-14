@@ -9,6 +9,7 @@ import { LoginComponent } from '../login/login.component';
 import { MainComponent } from '../main/main.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { Page404Component } from '../page404/page404.component';
+import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 const routes: Routes = [
   {
     path: '',
@@ -28,6 +29,11 @@ const routes: Routes = [
       {
         path: 'post/:id',
         component: MainComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'edit-profile',
+        component: EditProfileComponent,
         canActivate: [AuthGuard],
       },
     ],
