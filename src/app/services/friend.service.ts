@@ -18,4 +18,22 @@ export class FriendService {
     const url = `${environment.api}/friend/find-user?friend=${id}`;
     return this.http.get<FriendModel[]>(url);
   }
+
+  public follow(data: FriendModel[]): Observable<FriendModel[]> {
+    const url = `${environment.api}/add-friend`;
+    return this.http.post<FriendModel[]>(url, data[0]);
+  }
+
+  public update(id: string, data: FriendModel[]): Observable<FriendModel[]> {
+    const url = `${environment.api}//friend/update/${id}`;
+    return this.http.put<FriendModel[]>(url, data[0]);
+  }
+
+  public updateClearFriend(
+    id: string,
+    data: FriendModel[]
+  ): Observable<FriendModel[]> {
+    const url = `${environment.api}/friend/clear/${id}`;
+    return this.http.put<FriendModel[]>(url, data[0]);
+  }
 }

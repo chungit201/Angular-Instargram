@@ -18,6 +18,9 @@ export class UserProfileComponent implements OnInit, OnChanges {
   public posts?: any = [];
   public friends?: any = [];
   public checkUser?: boolean = false;
+  private followData: any[] = [];
+  public statusFollow: boolean = false;
+  private dataFollow: any = [];
   constructor(
     private router: ActivatedRoute,
     private userService: UserService,
@@ -33,6 +36,7 @@ export class UserProfileComponent implements OnInit, OnChanges {
         this.getPosts();
         this.getFollowers();
         this.checkUserProfile();
+        this.checkStatusFollow();
       });
   }
 
@@ -42,12 +46,79 @@ export class UserProfileComponent implements OnInit, OnChanges {
     this.getPosts();
     this.getFollowers();
     this.checkUserProfile();
+    this.checkStatusFollow();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
   }
 
+  public unFollow(): void {
+    const id = this.userService.getID();
+    this.statusFollow = false;
+    this.friendService.findUser(id).subscribe((data: any) => {
+      const idF = data.friend._id;
+      this.friendService.updateClearFriend(idF, []).subscribe((data) => {
+        let dataFL = this.dataFollow.filter((item: any) => item != this.id);
+        dataFL = [{ friend: [...dataFL] }];
+        this.friendService.update(idF, dataFL).subscribe(
+          (data) => {
+            console.log(data);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      });
+    });
+  }
+
+  private checkStatusFollow(): void {
+    const id = this.userService.getID();
+    if (id == this.id) return;
+    this.friendService.findUser(id).subscribe((data) => {
+      const { friend }: any = data;
+      this.dataFollow = [];
+      if (!friend || friend == null) return;
+      if (!friend.friends) return;
+      friend.friends.forEach((element: any) => {
+        this.dataFollow.push(element);
+        if (element == this.id) {
+          this.statusFollow = true;
+        }
+      });
+    });
+  }
+
+  public follow(): void {
+    const id = this.userService.getID();
+    this.friendService.findUser(id).subscribe((data: any) => {
+      if (data.friend.user != id) {
+        this.followData = [
+          {
+            user: id,
+            friends: [this.id],
+            status: true,
+          },
+        ];
+        this.friendService.follow(this.followData).subscribe(
+          () => {
+            this.statusFollow = true;
+          },
+          (error) => {
+            console.log(false);
+          }
+        );
+      } else {
+        const id = data.friend._id;
+        data = [{ friends: [this.id] }];
+
+        this.friendService.update(id, data).subscribe((data) => {
+          this.statusFollow = true;
+        });
+      }
+    });
+  }
   private checkUserProfile(): void {
     if (this.id == this.userService.getID()) {
       this.checkUser = true;
