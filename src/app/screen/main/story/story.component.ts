@@ -31,6 +31,7 @@ export class StoryComponent implements OnInit {
       let { friend }: any = data;
       if (friend) {
         const { friends } = friend;
+        if (!friends) return;
         friends.forEach((element: string) => {
           this.friends.push(element);
         });

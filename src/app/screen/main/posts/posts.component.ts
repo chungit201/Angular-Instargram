@@ -16,7 +16,7 @@ export class PostsComponent implements OnInit {
   public posts: PostModel[] = [];
   public dataAll: PostModel[] = [];
   public itemDetail: any;
-  private friends?: Object[] = [];
+  private friends?: any = [];
   private id?: string;
   constructor(
     private postService: PostService,
@@ -55,6 +55,7 @@ export class PostsComponent implements OnInit {
       }
     });
     if (this.friends?.length != 0) {
+      if (!this.friends || this.friends[0].friends == null) return;
       this.friends?.forEach((element: any) => {
         element.friends.forEach((element: any, index: number) => {
           post.forEach((postE: any) => {

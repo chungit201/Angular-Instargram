@@ -53,6 +53,7 @@ export class LikeByUserComponent implements OnChanges, OnInit {
 
   private getUserLike(): void {
     const { like } = this.itemPost;
+    if (!like || like == null) return;
     this.userService.profile(like.user[0]).subscribe((data) => {
       const { name }: any = data;
 
