@@ -16,7 +16,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './postdetail.component.html',
   styleUrls: ['./postdetail.component.css'],
 })
-export class PostdetailComponent implements OnChanges, OnInit {
+export class PostDetailComponent implements OnChanges, OnInit {
   @Input() itemDetail: any;
   public comments: any = [];
   private comment: CommentModel[] = [];

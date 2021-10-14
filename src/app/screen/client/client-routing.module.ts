@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../until/auth.goard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClientComponent } from './client.component';
@@ -8,30 +9,29 @@ import { LoginComponent } from '../login/login.component';
 import { MainComponent } from '../main/main.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { Page404Component } from '../page404/page404.component';
-import { GuardService } from 'src/app/services/guard.service';
 const routes: Routes = [
   {
     path: '',
     component: ClientComponent,
     children: [
-      { path: '', component: MainComponent, canActivate: [GuardService] },
+      { path: '', component: MainComponent, canActivate: [AuthGuard] },
       {
         path: 'messenger',
         component: MessengerComponent,
-        canActivate: [GuardService],
+        canActivate: [AuthGuard],
       },
       {
         path: 'profile/:id',
         component: UserProfileComponent,
-        canActivate: [GuardService],
+        canActivate: [AuthGuard],
       },
       {
         path: 'post/:id',
         component: MainComponent,
-        canActivate: [GuardService],
+        canActivate: [AuthGuard],
       },
     ],
-    canActivate: [GuardService],
+    canActivate: [AuthGuard],
   },
   { path: 'register', component: SignUpComponent },
   { path: 'login', component: LoginComponent },

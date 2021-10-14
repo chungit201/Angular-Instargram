@@ -50,10 +50,9 @@ export class LoginComponent implements OnInit {
           this.userService.setID(data.user._id);
           this.router.navigate(['/']);
         },
-        (err: any) => {
+        (error: any) => {
           this.loading = false;
-          let { error } = err;
-          this.errors = error.error;
+          this.errors = error;
         }
       );
     }, 1000);

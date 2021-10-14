@@ -26,7 +26,7 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { Page404Component } from '../page404/page404.component';
 import { GetShotTextPipe } from 'src/app/pipes/get-shot-text.pipe';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { PostdetailComponent } from '../main/posts/postdetail/postdetail.component';
+import { PostDetailComponent } from '../main/posts/postdetail/postdetail.component';
 import { LoadingComponent } from '../loading/loading.component';
 import { LikeByUserComponent } from '../main/posts/like-by-user/like-by-user.component';
 
@@ -65,7 +65,7 @@ export function jwtOptionsFactory() {
     LogoutComponent,
     UserProfileComponent,
     Page404Component,
-    PostdetailComponent,
+    PostDetailComponent,
     LoadingComponent,
     LikeByUserComponent,
   ],

@@ -3,12 +3,11 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from '../model/user-model';
-import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
   public register(data: UserModel[]): Observable<UserModel[]> {
     const url = `${environment.api}/signup`;
@@ -59,29 +58,21 @@ export class UserService {
 
   public profile(id: string): Observable<UserModel[]> {
     const url = `${environment.api}/profile/${id}`;
-    return this.http.get<UserModel[]>(url, {
-      headers: this.authService.getHeader(),
-    });
+    return this.http.get<UserModel[]>(url);
   }
 
   public updateProfile(id: string, data: UserModel[]): Observable<UserModel[]> {
     const url = `${environment.api}/profile/update/${id}`;
-    return this.http.put<UserModel[]>(url, data[0], {
-      headers: this.authService.getHeader(),
-    });
+    return this.http.put<UserModel[]>(url, data[0]);
   }
 
   public uniqueEmail(email: string): Observable<UserModel[]> {
     const url = `${environment.api}/profile/unique-email?email=${email}`;
-    return this.http.get<UserModel[]>(url, {
-      headers: this.authService.getHeader(),
-    });
+    return this.http.get<UserModel[]>(url);
   }
 
   public profileDetail(id: string): Observable<UserModel[]> {
     const url = `${environment.api}/profile/${id}`;
-    return this.http.get<UserModel[]>(url, {
-      headers: this.authService.getHeader(),
-    });
+    return this.http.get<UserModel[]>(url);
   }
 }
