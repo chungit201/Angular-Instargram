@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class PostsComponent implements OnInit {
   public postAll: PostModel[] = [];
   public posts: PostModel[] = [];
-  public dataAll: PostModel[] = [];
+  public dataAll: any = [];
   public itemDetail: any;
   private friends?: any = [];
   private id?: string;
@@ -73,6 +73,7 @@ export class PostsComponent implements OnInit {
     post.forEach((element: any) => {
       if (element.user._id === _id) {
         this.dataAll.push(element);
+        console.log(this.dataAll);
       }
     });
   }

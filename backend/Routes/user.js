@@ -4,7 +4,8 @@ import {
   userDetail,
   updateUser,
   searchUser,
-  uniqueEmail
+  uniqueEmail,
+  updateDetailProfile
 } from '../Controllers/userControllers';
 import {
   authToken
@@ -15,7 +16,7 @@ router.get('/profile/search', authToken, searchUser);
 router.get('/profile/unique-email', uniqueEmail);
 router.get('/profile/:userID', authToken, userDetail);
 router.put('/profile/update/:userID', authToken, updateUser);
-
+router.put('/profile/update-detail/:userID', authToken, updateDetailProfile)
 
 router.param('userID', userID);
 module.exports = router;

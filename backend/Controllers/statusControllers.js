@@ -7,7 +7,7 @@ export const listStatus = (req, res) => {
 
   Status.find({}).limit(limit).sort({
     '_id': -1
-  }).populate('user like comment', 'name amount user content').exec((err, status) => {
+  }).populate('user like comment', 'name amount user content avatar').exec((err, status) => {
     if (err) {
       return res.status(400).json({
         error: "product does not exit"

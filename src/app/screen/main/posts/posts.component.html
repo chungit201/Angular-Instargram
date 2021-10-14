@@ -5,7 +5,16 @@
       <div class="post__header">
         <div class="post__profile">
           <a href="#" class="post__avatar">
-            <img src="assets/default-user.png" alt="User Picture" />
+            <img
+              *ngIf="!post.user.avatar"
+              src="assets/default-user.png"
+              alt="User Picture"
+            />
+            <img
+              *ngIf="post.user.avatar"
+              src="{{ post.user.avatar }}"
+              alt="User Picture"
+            />
           </a>
           <a
             class="post__user"

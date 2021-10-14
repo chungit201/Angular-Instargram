@@ -8,15 +8,23 @@ import { UserService } from 'src/app/services/user.service';
 export class HeaderComponent implements OnInit {
   public bgColor?: string;
   public id?: string;
+  public dataUser?: any;
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.getID();
+    this.getUser();
     if (this.getBgColor()) {
       this.bgColor = this.getBgColor();
     } else {
       this.bgColor = 'light';
     }
+  }
+
+  private getUser(): void {
+    this.userService.profileDetail(this.id!).subscribe((data) => {
+      this.dataUser = data;
+    });
   }
 
   private getID(): void {

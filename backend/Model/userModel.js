@@ -52,6 +52,9 @@ const userSchema = new mongoose.Schema({
   activeStatus: {
     type: Boolean,
     default: false
+  },
+  gender: {
+    type: String
   }
 
 }, {

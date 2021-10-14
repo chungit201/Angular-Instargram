@@ -75,4 +75,12 @@ export class UserService {
     const url = `${environment.api}/profile/${id}`;
     return this.http.get<UserModel[]>(url);
   }
+
+  public updateProfileDetail(
+    id: string,
+    data: UserModel[]
+  ): Observable<UserModel[]> {
+    const url = `${environment.api}/profile/update-detail/${id}`;
+    return this.http.put<UserModel[]>(url, data[0]);
+  }
 }

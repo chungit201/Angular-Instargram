@@ -1,5 +1,5 @@
 import User from '../Model/userModel';
-
+import _ from 'lodash';
 // lấy id của profile
 export const userID = (req, res, next, id) => {
   User.findById(id).exec((err, user) => {
@@ -35,6 +35,22 @@ export const updateUser = (req, res) => {
     user.hashed_password = undefined;
     user.salt = undefined;
     res.json(user)
+  })
+}
+
+export const updateDetailProfile = (req, res) => {
+  let profile = req.profile;
+  profile = Object.assign(profile, req.body);
+  profile.save((err, profile) => {
+    if (err) {
+      return res.status(400).json({
+        error: 'Update profile failure!'
+      })
+    }
+    res.json({
+      profile,
+      message: 'Update profile successfully'
+    })
   })
 }
 
