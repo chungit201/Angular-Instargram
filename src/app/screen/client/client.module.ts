@@ -29,7 +29,6 @@ import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { PostDetailComponent } from '../main/posts/postdetail/postdetail.component';
 import { LoadingComponent } from '../loading/loading.component';
 import { LikeByUserComponent } from '../main/posts/like-by-user/like-by-user.component';
-import { UserLikeComponent } from '../main/posts/like-by-user/user-like/user-like.component';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 
 export function tokenGetter() {
@@ -70,7 +69,6 @@ export function jwtOptionsFactory() {
     PostDetailComponent,
     LoadingComponent,
     LikeByUserComponent,
-    UserLikeComponent,
     EditProfileComponent
   ],
   imports: [

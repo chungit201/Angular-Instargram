@@ -7,19 +7,8 @@
       <section class="post">
         <header>
           Create Post
-          <svg
-            class="close"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
+          <svg class="close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </header>
         <form class="form_post" (submit)="createPost()" [formGroup]="postForm">
@@ -28,14 +17,8 @@
             <p>{{ name }}</p>
           </div>
           <div style="overflow: auto; height: 300px">
-            <textarea
-              (keyup)="reSizeStatus($event)"
-              spellcheck="false"
-              formControlName="description"
-              class="textarea_post"
-              placeholder="What's on your mind?"
-              required
-            ></textarea>
+            <textarea (keyup)="reSizeStatus($event)" spellcheck="false" formControlName="description"
+              class="textarea_post" placeholder="What's on your mind?" required></textarea>
             <!---Upload Image-->
             <div class="container_up_image">
               <div class="wrapper_up_image">
@@ -44,48 +27,22 @@
                 </div>
                 <div class="content_up_image">
                   <div class="icon">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                     </svg>
                   </div>
                   <div class="text">Upload Picture!</div>
                 </div>
                 <div id="cancel_up_image">
-                  <svg
-                    class="close"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
+                  <svg class="close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </div>
                 <div class="file-name">File name here</div>
               </div>
-              <input
-                class="img-upload"
-                id="default-btn"
-                type="file"
-                formControlName="photo"
-                hidden
-                required
-              />
+              <input class="img-upload" id="default-btn" type="file" formControlName="photo" hidden required />
             </div>
             <!---End script preview image upload-->
           </div>
@@ -96,20 +53,17 @@
               <li (click)="defaultBtnActive()">
                 <img
                   src="https://firebasestorage.googleapis.com/v0/b/ecmascript-7a6e3.appspot.com/o/images%2FFacebook-Post-master%2Fgallery.svg?alt=media&token=fa652cb9-15ec-4165-b039-0617461e3369"
-                  alt=""
-                />
+                  alt="" />
               </li>
               <li>
                 <img
                   src="https://firebasestorage.googleapis.com/v0/b/ecmascript-7a6e3.appspot.com/o/images%2FFacebook-Post-master%2Fsmile.svg?alt=media&token=272f8ecb-a31c-4db7-a954-3aaca34281c7"
-                  alt=""
-                />
+                  alt="" />
               </li>
               <li>
                 <img
                   src="https://firebasestorage.googleapis.com/v0/b/ecmascript-7a6e3.appspot.com/o/images%2FFacebook-Post-master%2Ftag.svg?alt=media&token=e4bda083-a78b-4aa2-b373-425a05bd01e8"
-                  alt=""
-                />
+                  alt="" />
               </li>
             </ul>
           </div>
