@@ -15,7 +15,9 @@
           <span class="text-gray-700 text-2xl tracking-wider mr-8">{{
             profile.name | getShotText
           }}</span>
+
           <button
+            *ngIf="checkUser"
             class="
               bg-transparent
               hover:bg-blue-400
@@ -30,6 +32,23 @@
             "
           >
             Edit Profile
+          </button>
+          <button
+            *ngIf="!checkUser"
+            class="
+              bg-transparent
+              hover:bg-blue-400
+              text-gray-700
+              font-semibold
+              hover:text-white
+              py-1
+              px-4
+              border border-gray-600
+              hover:border-transparent
+              rounded
+            "
+          >
+            flollow
           </button>
         </div>
 
