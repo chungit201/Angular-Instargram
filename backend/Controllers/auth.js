@@ -1,46 +1,39 @@
-import jwt from 'jsonwebtoken';
-import {
-  v4 as uuidv4
-} from 'uuid';
-const User = require('../Model/userModel');
-const nodemailer = require('nodemailer');
+import jwt from "jsonwebtoken";
+import { v4 as uuidv4 } from "uuid";
+const User = require("../Model/userModel");
+const nodemailer = require("nodemailer");
 
 // đăng ký gửi from về email
 export const registerControllers = async (req, res) => {
-  const {
-    name,
-    email,
-    password,
-    birthday
-  } = req.body;
+  const { name, email, password, birthday } = req.body;
   const users = new User({
     name,
     email,
     password,
     birthday,
-    emailToken: uuidv4()
+    emailToken: uuidv4(),
   });
   if (!users.email || !users.hashed_password || !users.name) {
     return res.status(400).json({
       error: false,
-      message: 'register false'
+      message: "register false",
     });
   }
 
   let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
+    host: "smtp.gmail.com",
     port: 465,
     secure: true,
     auth: {
       user: process.env.EMAIL_FROM,
-      pass: process.env.EMAIL_PASS
-    }
+      pass: process.env.EMAIL_PASS,
+    },
   });
 
   let emailDetail = {
     from: `Verify your email ${process.env.EMAIL_FROM}`,
     to: users.email,
-    subject: 'Verify your email',
+    subject: "Verify your email",
     html: `
     <style type="text/css">
         @media screen {
@@ -434,8 +427,8 @@ export const registerControllers = async (req, res) => {
       </tr>
     </table>
   </body>
-    `
-  }
+    `,
+  };
 
   transporter.sendMail(emailDetail, async function (err) {
     if (err) {
@@ -444,133 +437,129 @@ export const registerControllers = async (req, res) => {
     await users.save();
     res.json({
       emailToken: users.emailToken,
-      message: 'Verification email is sent to your gmail account'
-    })
-  })
-}
+      message: "Verification email is sent to your gmail account",
+    });
+  });
+};
 
 export const activeEmail = async (req, res) => {
   try {
     const token = req.query.token;
     let user = await User.findOne({
-      emailToken: token
+      emailToken: token,
     });
     if (user) {
       let dataNew = {
         emailToken: null,
-        active: true
-      }
+        active: true,
+      };
       dataNew = Object.assign(user, dataNew);
       dataNew.save((err, data) => {
         if (err) {
           return res.status(400).json({
-            error: 'Active user failure'
-          })
+            error: "Active user failure",
+          });
         }
-      })
+      });
       return res.json({
-        message: 'verify account successfully'
+        message: "verify account successfully",
       });
     }
     return res.status(403).json({
-      error: 'Email is not verified'
-    })
+      error: "Email is not verified",
+    });
   } catch (error) {
     return res.status(403).json({
-      error
-    })
+      error,
+    });
   }
-}
+};
 
 // kiển tra trạng thái active
 export const checkActiveEmail = async (req, res, next) => {
   try {
     const user = await User.findOne({
-      email: req.body.email
-    })
+      email: req.body.email,
+    });
     if (user.active) {
       next();
     } else {
       return res.status(401).json({
-        error: 'Please check your email to verify your account'
-      })
+        error: "Please check your email to verify your account",
+      });
     }
   } catch (error) {
     return res.status(401).json({
-      error: 'Please check user or password'
-    })
+      error: "Please check user or password",
+    });
   }
-}
+};
 
 // đăng nhập, kiểm tra thông tin
 
 exports.signin = (req, res) => {
-  const {
-    email,
-    password
-  } = req.body;
+  const { email, password } = req.body;
   User.findOne({
-    email
+    email,
   }).exec((err, user) => {
     if (!user || err) {
       return res.status(401).json({
-        error: 'User with that email does not exist. Please signup'
-      })
+        error: "User with that email does not exist. Please signup",
+      });
     }
     if (!user.authenticate(password)) {
       return res.status(401).json({
-        error: 'Email or password not match'
-      })
+        error: "Email or password not match",
+      });
     }
 
-    const token = jwt.sign({
-      _id: user._id
-    }, process.env.JWT_SECRET, {
-      expiresIn: '3600s'
+    const time = "3600";
+
+    const token = jwt.sign(
+      {
+        _id: user._id,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: `${time}s`,
+      }
+    );
+
+    res.cookie("token", token, {
+      expired: new Date() + 9999,
     });
 
-    res.cookie('token', token, {
-      expired: new Date() + 9999
-    });
-
-    const {
-      _id,
-      name,
-      email,
-      avatar,
-      birthday,
-      activeStatus
-    } = user;
+    const { _id, name, email, avatar, birthday, activeStatus } = user;
     return res.json({
       token,
+      time,
       user: {
         _id,
         email,
         name,
         avatar,
         birthday,
-        activeStatus
-      }
-    })
-  })
-}
+        activeStatus,
+      },
+    });
+  });
+};
 
 // đăng xuất
 export const signout = (req, res) => {
-  res.clearCookie('token');
+  res.clearCookie("token");
   return res.json({
-    message: 'Singout succsessfully'
-  })
-}
-
+    message: "Singout succsessfully",
+  });
+};
 
 // xác nhận là user tồn tại
 export const isAuth = (req, res, next) => {
   let user = req.profile && req.auth && req.profile._id == req.auth._id;
   if (!user) {
     return res.status(403).json({
-      error: 'Access Denied'
-    })
+      error: "Access Denied",
+    });
   }
   next();
-}
+};

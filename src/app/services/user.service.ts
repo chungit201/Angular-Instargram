@@ -75,4 +75,11 @@ export class UserService {
     const url = `${environment.api}/profile/${id}`;
     return this.http.get<UserModel[]>(url);
   }
+
+  public setTimeToken(token: string): void {
+    localStorage.setItem('timeToken', token);
+  }
+  public getTimeToken(): any {
+    return localStorage.getItem('timeToken');
+  }
 }
