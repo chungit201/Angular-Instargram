@@ -1,40 +1,41 @@
 <span *ngIf="textLike">
   Liked by
-  <span class="post__name--underline cursor-pointer" (click)="listLike($event)"
-    >{{ textLike }}
+  <span class="post__name--underline cursor-pointer" (click)="listLike($event)">
+    {{ textLike }}
   </span>
 </span>
-<div (click)="outlike()" id="overBg"></div>
 
-<div class="like_user flex items-center" *ngIf="userLike" style="height: 420px">
-  <div class="title__like-top">
-    <div class="row container">
-      <div class="col-1"></div>
-      <div class="col-10">
-        <h6 class="title_like">Likes</h6>
-      </div>
-      <div class="col-1">
-        <a
-          (click)="clearBox($event)"
-          id="clearBox__likes"
-          class="flex justify-end mr-4"
-        >
-          <svg
-            aria-label="Đóng"
-            width="24"
-            height="24"
-            viewBox="0 0 48 48"
-            style="margin-bottom: 0.5rem"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M41.1 9.1l-15 15L41 39c.6.6.6 1.5 0 2.1s-1.5.6-2.1 0L24 26.1l-14.9 15c-.6.6-1.5.6-2.1 0-.6-.6-.6-1.5 0-2.1l14.9-15-15-15c-.6-.6-.6-1.5 0-2.1s1.5-.6 2.1 0l15 15 15-15c.6-.6 1.5-.6 2.1 0 .6.6.6 1.6 0 2.2z"
-              fill-rule="evenodd"
-            ></path>
+<div id="likeDetailPost">
+  <div (click)="outlike()" id="overBg"></div>
+
+  <div class="like_user flex items-center" *ngIf="userLike" style="height: 420px">
+    <div class="title__like-top">
+      <div class="row container">
+        <header>
+          Likes
+          <svg (click)="closeDialog()" class="close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
-        </a>
+        </header>
+      </div>
+    </div>
+
+    <div class="box__like">
+      <div class="list_numberlike">
+        <div class="information">
+          <div class="flex justify-between items-center">
+            <a routerLink="/profile/" class="flex items-center">
+              <img class="w-12 h-12 rounded-full" src="assets/default-user.png" alt="User Picture" />
+              <span style="color: rgb(48, 48, 48); font-weight: 600;" class="ml-4">Duc Anh</span>
+            </a>
+
+            <button class="people_like-button btn btn-primary">
+              Follow
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <app-user-like></app-user-like>
 </div>

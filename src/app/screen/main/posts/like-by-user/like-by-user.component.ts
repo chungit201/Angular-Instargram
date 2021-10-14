@@ -24,16 +24,18 @@ export class LikeByUserComponent implements OnChanges, OnInit {
 
   listLike(e: any) {
     e.preventDefault();
-
     this.getUser();
     const likesUser = document.querySelector('.like_user') as HTMLElement;
     let btnUserLike = document.querySelectorAll('#listLike');
     const overBg = document.querySelector('#overBg') as HTMLElement;
+    let modal: HTMLElement = document.getElementById('likeDetailPost')!;
     overBg.style.backgroundColor = 'black';
     overBg.style.opacity = '0.5';
     overBg.style.position = 'fixed';
     likesUser.style.display = 'block';
+    modal.style.display = 'block';
   }
+
   outlike() {
     const likesUser = document.querySelector('.like_user') as HTMLElement;
     const overBg = document.querySelector('#overBg') as HTMLElement;
@@ -41,6 +43,7 @@ export class LikeByUserComponent implements OnChanges, OnInit {
     overBg.style.opacity = '0';
     overBg.style.position = '';
   }
+
   clearBox(e: any) {
     e.preventDefault();
     const likesUser = document.querySelector('.like_user') as HTMLElement;
@@ -77,5 +80,10 @@ export class LikeByUserComponent implements OnChanges, OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     // console.log(changes);
+  }
+
+  closeDialog(): void {
+    let modal: HTMLElement = document.getElementById('likeDetailPost')!;
+    modal.style.display = 'none';
   }
 }
