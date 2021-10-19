@@ -11,7 +11,7 @@ export const showLikeByID = (req, res) => {
 
 
 export const likeID = (req, res, next, id) => {
-  Like.findById(id)
+  Like.findById(id).populate('user', 'name avatar')
     .exec((err, like) => {
       if (err || !like) {
         res.status(400).json({

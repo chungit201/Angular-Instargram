@@ -4,7 +4,8 @@ const {
 } = mongoose.Schema;
 const likeSchema = new mongoose.Schema({
   user: {
-    type: Array,
+    type: ObjectId,
+    ref: 'User',
   },
   status: {
     type: ObjectId,
