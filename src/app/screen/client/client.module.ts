@@ -30,6 +30,7 @@ import { PostDetailComponent } from '../main/posts/postdetail/postdetail.compone
 import { LoadingComponent } from '../loading/loading.component';
 import { LikeByUserComponent } from '../main/posts/like-by-user/like-by-user.component';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
+import { DetailComponent } from '../main/posts/like-by-user/detail/detail.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -69,7 +70,8 @@ export function jwtOptionsFactory() {
     PostDetailComponent,
     LoadingComponent,
     LikeByUserComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    DetailComponent,
   ],
   imports: [
     CommonModule,

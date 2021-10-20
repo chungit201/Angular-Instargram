@@ -37,7 +37,7 @@ export class LikeComponent implements OnInit {
 
   private countHearted(like: any): void {
     if (!like || like == null) return;
-    if (like.user.length === 0) {
+    if (like.user == undefined || like.user.length === 0) {
       const data: any = [{ user: [this.id], amount: like.amount + 1 }];
       this.likeService.updateLike(like._id, data).subscribe();
     } else {
@@ -80,7 +80,7 @@ export class LikeComponent implements OnInit {
   private checkActiveLike(): void {
     this.likeService.findLike(this.itemPost._id).subscribe((data) => {
       let { like }: any = data;
-      if (!like || like == null) return;
+      if (!like.user || like == null) return;
       like.user.forEach((user: any) => {
         if (user == this.id) {
           this.activeLike = true;

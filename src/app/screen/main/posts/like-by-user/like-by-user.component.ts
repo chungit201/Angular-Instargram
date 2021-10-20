@@ -15,11 +15,14 @@ import { UserService } from 'src/app/services/user.service';
 export class LikeByUserComponent implements OnChanges, OnInit {
   @Input() itemPost: any;
   public textLike?: string;
-  public userLike: any = [];
+  public userLike?: any[];
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.getUserLike();
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    // console.log(changes);
   }
 
   listLike(e: any) {
@@ -36,7 +39,7 @@ export class LikeByUserComponent implements OnChanges, OnInit {
     modal.style.display = 'block';
   }
 
-  outlike() {
+  outLike() {
     const likesUser = document.querySelector('.like_user') as HTMLElement;
     const overBg = document.querySelector('#overBg') as HTMLElement;
     likesUser.style.display = 'none';
@@ -59,7 +62,6 @@ export class LikeByUserComponent implements OnChanges, OnInit {
     if (!like || like == null) return;
     this.userService.profile(like.user[0]).subscribe((data) => {
       const { name }: any = data;
-
       if (like.amount == 1) {
         this.textLike = name;
         return;
@@ -70,16 +72,21 @@ export class LikeByUserComponent implements OnChanges, OnInit {
 
   public getUser(): void {
     const { like } = this.itemPost;
-    like.user.forEach((user: any) => {
+    // this.userLike = [];
+    let dataUserLike: any = [];
+    like.user.forEach((user: any, index: number) => {
       this.userService.profile(user).subscribe((data: any) => {
-        this.userLike.push(data);
-        console.log(this.userLike);
+        const dataUser = {
+          _id: data._id,
+          name: data.name,
+          avatar: data.avatar,
+        };
+        dataUserLike.push(dataUser);
+        if (index + 1 == like.user.length) {
+          this.userLike = dataUserLike;
+        }
       });
     });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    // console.log(changes);
   }
 
   closeDialog(): void {

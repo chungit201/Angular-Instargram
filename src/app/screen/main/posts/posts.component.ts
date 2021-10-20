@@ -73,7 +73,6 @@ export class PostsComponent implements OnInit {
     post.forEach((element: any) => {
       if (element.user._id === _id) {
         this.dataAll.push(element);
-        console.log(this.dataAll);
       }
     });
   }

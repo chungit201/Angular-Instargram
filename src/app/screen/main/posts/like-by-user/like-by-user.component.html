@@ -6,16 +6,27 @@
 </span>
 
 <div id="likeDetailPost">
-  <div (click)="outlike()" id="overBg"></div>
+  <div (click)="outLike()" id="overBg"></div>
 
-  <div class="like_user flex items-center" *ngIf="userLike" style="height: 420px">
+  <div class="like_user flex items-center" style="height: 420px">
     <div class="title__like-top">
       <div class="row container">
         <header>
           Likes
-          <svg (click)="closeDialog()" class="close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          <svg
+            (click)="closeDialog()"
+            class="close"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </header>
       </div>
@@ -25,14 +36,9 @@
       <div class="list_numberlike">
         <div class="information">
           <div class="flex justify-between items-center">
-            <a routerLink="/profile/" class="flex items-center">
-              <img class="w-12 h-12 rounded-full" src="assets/default-user.png" alt="User Picture" />
-              <span style="color: rgb(48, 48, 48); font-weight: 600;" class="ml-4">Duc Anh</span>
-            </a>
+            <app-detail [userLike]="userLike"></app-detail>
 
-            <button class="people_like-button btn btn-primary">
-              Follow
-            </button>
+            <button class="people_like-button btn btn-primary">Follow</button>
           </div>
         </div>
       </div>

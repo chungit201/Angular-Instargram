@@ -93,7 +93,7 @@ export class UserProfileComponent implements OnInit, OnChanges {
   public follow(): void {
     const id = this.userService.getID();
     this.friendService.findUser(id).subscribe((data: any) => {
-      if (data.friend.user != id) {
+      if (data.friend == null || data.friend.user != id) {
         this.followData = [
           {
             user: id,
