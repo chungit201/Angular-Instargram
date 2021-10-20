@@ -42,8 +42,12 @@ export class DetailComponent implements OnInit, OnChanges {
         <a routerLink="/profile/${value._id}" class="flex items-center">
         ${avt}
         
-        <span style="color: rgb(48, 48, 48); font-weight: 600" class="ml-4">${value.name}</span>
+        <span style="color: rgb(48, 48, 48); font-weight: 600" class="relative ml-4">${value.name}</span>
+        <button style='
+        font-weight: 600;
+        color: rgb(27, 177, 236);' class="absolute right-4 people_like-button btn btn-primary">Follow</button>
       </a>
+      
         `;
         })
         .join('');
