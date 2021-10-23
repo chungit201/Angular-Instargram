@@ -1,0 +1,12 @@
+<a href="javascript:;">
+    <span (click)="openCommentDetail()" class="view-all-comment">See all {{totalComment}} comments</span>
+</a>
+<div *ngFor="let value of limitData">
+    <div class="box-comment-post">
+        <span *ngIf="value.user.name" class="username-like-comment"> {{value.user.name}} </span>
+        <span> {{value.content}}</span>
+    </div>
+    <span class="time-comment">
+        {{ value.createdAt | timeDistance: value.createdAt }}
+    </span>
+</div>

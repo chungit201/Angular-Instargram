@@ -123,7 +123,7 @@
             <a class="post__likes-avatar">
               <img src="assets/default-user.png" alt="User Picture" />
             </a>
-
+      
             <app-like-by-user [itemPost]="post"></app-like-by-user>
           </div>
 
@@ -137,8 +137,9 @@
               {{ post.createdAt | timeDistance: post.createdAt }}
             </span>
           </div>
-
+          <app-list-comment  [itemPost]="post" ></app-list-comment>
           <app-comment [itemPost]="post"></app-comment>
+        
         </div>
       </div>
     </article>

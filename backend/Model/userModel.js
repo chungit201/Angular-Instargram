@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
     type: ObjectId,
     ref: 'Status'
   },
+  follower :{
+    type:ObjectId,
+    ref: 'Follow'
+  },
   birthday: {
     type: Date,
   },

@@ -1,6 +1,44 @@
 import User from '../Model/userModel';
 import _ from 'lodash';
 // lấy id của profile
+export const getusers = async (req,res)=>{
+      //pagination
+      let { _page,_limit }= req.query;
+      _limit = Number(_limit)
+      const countDocuments = await User.countDocuments({});
+      console.log(countDocuments);
+      if(_page && _limit){
+          let currentPage = Number(_page);
+          if(currentPage < 1){
+              currentPage = 1;
+          }
+          var skipDocuments = (currentPage - 1) * _limit;
+          User.find({})
+          .skip(skipDocuments)
+          .limit(_limit)
+          .then(docs=>{
+              res.status(200).json({
+                  data : docs, totalPage : Math.ceil(countDocuments / _limit)
+              })
+          })
+          .catch(err=>{
+              console.log(err.message);
+              res.status(400).json({
+                  message : ['ERROR_SERVER']
+              })
+          })
+      }else{
+        User.find({}).populate('follower', 'name _id')
+          .then(data=>{
+              res.json(data);
+          })
+          .catch(err=>{
+              res.status(400).json('loi sever')
+          })
+      }
+ 
+}
+
 export const userID = (req, res, next, id) => {
   User.findById(id).exec((err, user) => {
     if (err) {

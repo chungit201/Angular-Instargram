@@ -1,0 +1,23 @@
+.box-comment-post {
+    display: flex;
+    position: relative;
+}
+.time-comment{
+    font-size: 13px;
+    color: rgba(var(--f52,142,142,142),1);
+}
+.box-comment-post span{
+    padding: 2px;
+    font-size: 14px;
+}
+.icon-love{
+    position: absolute;
+    right: 10px;
+}
+.username-like-comment{
+    font-weight: 600;
+}
+.view-all-comment{
+    font-size: 14px;
+    color: rgba(var(--f52,142,142,142),1)
+  }

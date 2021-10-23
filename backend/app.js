@@ -2,17 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import { createMess } from "./Controllers/messageControllers";
 const app = express();
+app.use(cors())
+
 const http = require("http");
+
 const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-  },
-});
+const io = require('socket.io')(server)
+
 
 const authRouter = require("./Routes/auth");
 const userRouter = require("./Routes/user");
@@ -20,6 +17,7 @@ const statusRouter = require("./Routes/status");
 const likeRouter = require("./Routes/like");
 const commentRouter = require("./Routes/comment");
 const friendRouter = require("./Routes/friend");
+const followRouter = require('./Routes/follow')
 
 dotenv.config();
 
@@ -38,11 +36,7 @@ mongoose.connection.on("error", (err) => {
 
 // Middleware
 app.use(express.json());
-app.use(
-  cors({
-    credentials: "same-origin",
-  })
-);
+
 
 app.use("/api", authRouter);
 app.use("/api", userRouter);
@@ -50,17 +44,23 @@ app.use("/api", statusRouter);
 app.use("/api", likeRouter);
 app.use("/api", commentRouter);
 app.use("/api", friendRouter);
+app.use("/api", followRouter);
 
-io.on("connection", (socket) => {
-  socket.on("message", async (data) => {
-    console.log(await createMess(data));
-    // const mess = await createMess(data);
-    // console.log(mess);
-    // io.emit("message", mess);
-  });
-});
+
 
 const port = process.env.PORT || 8000;
 server.listen(port, () => {
   console.log(`Server is running on port : ${port}`);
+});
+
+io.on("connection", (socket) => {
+  console.log('User connected');
+  socket.on('join',(data)=>{
+    socket.join(data.room);
+    socket.broadcast.to(data.room).emit('user joined');
+  });
+
+  socket.on('message',(data)=>{
+    io.in(data.room).emit('new message',{user:data.user , message: data.message});
+  })
 });

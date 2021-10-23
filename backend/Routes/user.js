@@ -5,7 +5,8 @@ import {
   updateUser,
   searchUser,
   uniqueEmail,
-  updateDetailProfile
+  updateDetailProfile,
+  getusers
 } from '../Controllers/userControllers';
 import {
   authToken
@@ -13,6 +14,7 @@ import {
 const router = express.Router();
 
 router.get('/profile/search', authToken, searchUser);
+router.get('/users',authToken,getusers)
 router.get('/profile/unique-email', uniqueEmail);
 router.get('/profile/:userID', authToken, userDetail);
 router.put('/profile/update/:userID', authToken, updateUser);

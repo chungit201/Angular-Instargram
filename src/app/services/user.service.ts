@@ -55,7 +55,10 @@ export class UserService {
     const url = `${environment.api}/signout`;
     return this.http.get<UserModel[]>(url);
   }
-
+  public profiles(): Observable<UserModel[]> {
+    const url = `${environment.api}/users?_page=1&_limit=10`;
+    return this.http.get<UserModel[]>(url);
+  }
   public profile(id: string): Observable<UserModel[]> {
     const url = `${environment.api}/profile/${id}`;
     return this.http.get<UserModel[]>(url);
