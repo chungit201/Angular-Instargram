@@ -30,10 +30,7 @@ export class LikeService {
     return this.http.get<LikeModel[]>(url);
   }
 
-  public updateUserLike(
-    id: string,
-    data: LikeModel[]
-  ): Observable<LikeModel[]> {
+  public updateUserLike(id: string, data: LikeModel[]): Observable<LikeModel[]> {
     const url = `${environment.api}/like/update-like-user/${id}`;
     return this.http.put<LikeModel[]>(url, data[0]);
   }

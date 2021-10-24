@@ -54,13 +54,9 @@ server.listen(port, () => {
 });
 
 io.on("connection", (socket) => {
-  console.log('User connected');
-  socket.on('join',(data)=>{
-    socket.join(data.room);
-    socket.broadcast.to(data.room).emit('user joined');
+  console.log('User connected : '+socket.id);
+  socket.on('client-chat',(data)=>{
+    console.log(data);
+    io.sockets.emit('serve-user-chat', data);
   });
-
-  socket.on('message',(data)=>{
-    io.in(data.room).emit('new message',{user:data.user , message: data.message});
-  })
 });

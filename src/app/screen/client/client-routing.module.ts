@@ -10,6 +10,7 @@ import { MainComponent } from '../main/main.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { Page404Component } from '../page404/page404.component';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
+import { FormChatComponent } from '../messenger/form-chat/form-chat.component';
 const routes: Routes = [
   {
     path: '',
@@ -19,6 +20,12 @@ const routes: Routes = [
       {
         path: 'messenger',
         component: MessengerComponent,
+        children:[
+          {
+            path:'user/:id',
+            component: FormChatComponent
+          }
+        ],
         canActivate: [AuthGuard],
       },
       {

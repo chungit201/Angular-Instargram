@@ -10,22 +10,14 @@ export class WebSocketService {
   constructor() {
     this.socket= io(this.url,{ transports: ['websocket', 'polling', 'flashsocket'] });
    }
-  joinRoom(data:any):void{
-    this.socket.emit('join',data);
-  }
-
-  sendMessage(data:any):void{
-    this.socket.emit('message',data);
-  };
-
-  getMessage() : Observable <any> {
-    return new Observable<{user:string,message: string}>(observable =>{
-      this.socket.on('new message',(data)=>{
-        observable.next(data)
-      });
-      return () =>{
-        this.socket.disconnect();
-      }
-    })
-  }
+   listen(eventName:string){
+     return new  Observable((subscriber)=>{
+       this.socket.on(eventName,(data)=>{
+          subscriber.next(data);
+       })
+     })
+   }
+   emit(eventName:string,data:any){
+     this.socket.emit(eventName,data);
+   }
 }

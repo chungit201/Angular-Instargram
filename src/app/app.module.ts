@@ -6,10 +6,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ActiveEmailComponent } from './screen/login/active-email/active-email.component';
 import { JwtInterceptor } from './until/jwt.interceptor';
 import { ErrorInterceptor } from './until/error.interceptor';
+import { FormChatComponent } from './screen/messenger/form-chat/form-chat.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, ActiveEmailComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  declarations: [AppComponent, ActiveEmailComponent, FormChatComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule,ReactiveFormsModule],
   providers: [
 
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

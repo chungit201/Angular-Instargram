@@ -59,7 +59,7 @@ export const removeFriend = (req, res) => {
 export const updateFriend = (req, res) => {
   let friend = req.friend;
   friend = _.assign(friend, req.body);
-  friend.save((err, ...friend) => {
+  friend.save((err,friend) => {
     if (err || !friend) {
       return res.status(400).json({
         err,
@@ -67,7 +67,7 @@ export const updateFriend = (req, res) => {
       });
     }
     res.json({
-      ...friend,
+      friend,
       message: "update friend successfully",
     });
   });
