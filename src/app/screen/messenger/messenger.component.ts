@@ -40,11 +40,9 @@ export class MessengerComponent implements OnInit {
   private getFriendUser(): void {
     this.friendService.findUser(this.id).subscribe((data: FriendModel[]) => {
       let { friend }: any = data;
-      console.log(friend);
         friend.friends.forEach((element: string) => {
         this.userService.profileDetail(element).subscribe((data: any) => {
           this.dataFriend.push(data)  
-          console.log(this.dataFriend);
         });
       });
     });

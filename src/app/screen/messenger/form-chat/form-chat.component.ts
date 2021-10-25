@@ -18,6 +18,7 @@ export class FormChatComponent implements OnInit {
   ngOnInit(): void {
     this.getDataUser();
     this.getID()
+    this.getMessClient()
   }
   chatForm = new FormGroup({
     messages: new FormControl(''),
@@ -28,7 +29,6 @@ export class FormChatComponent implements OnInit {
       .subscribe((data) => {
         this.dataUser = data
         console.log(this.dataUser);
-
       });
   }
   private getID(): void {
@@ -40,81 +40,63 @@ export class FormChatComponent implements OnInit {
       message: this.chatForm.value.messages
     }
     this.webSocketService.emit('client-chat', sendMess);
-
+  };
+  getMessClient(){
+    const boxChat = document.querySelector('.chat-message') as HTMLElement;
     this.webSocketService.listen('serve-user-chat').subscribe((data: any) => {
-      const boxChat = document.querySelector('.chat-message') as HTMLElement;
-    if(data.name == this.dataUser.name){
-      const MyChat = `  <div class="flex items-end justify-end">
-      <div
-        class="
-          flex flex-col
-          space-y-2
-          text-xs
-          max-w-xs
-          mx-2
-          order-1
-          items-end
-        "
-      >
-        <div>
-          <span
-            class="
-              px-4
-              py-2
-              rounded-lg
-              inline-block
-              bg-gray-200
-              text-gray-600
-            "
-            >${data.message}</span
-          >
+      if(data.user==this.dataUser.name){
+        const MyChat = `  <div class="flex items-end justify-end">
+        <div
+          class="
+            flex flex-col
+            space-y-2,
+            float-right
+            text-xs
+            max-w-xs
+            mx-2
+            order-1
+            items-end
+          "
+        >
+          <div>
+            <span
+              class="
+                px-4
+                py-2
+                rounded-lg
+                inline-block
+                bg-gray-200
+                text-gray-600
+              "
+              >${data.message}</span
+            >
+          </div>
+     
         </div>
-   
-      </div>
-      <img
-        src="assets/default-user.png"
-        alt="My profile"
-        class="w-6 h-6 rounded-full order-2"
-      />
-    </div>`
-      boxChat.innerHTML += MyChat
-    }else{
-      const friendChat = `     <div class="flex items-end">
-      <div
-        class="
-          flex flex-col
-          space-y-2
-          text-xs
-          max-w-xs
-          mx-2
-          order-2
-          items-start
-        "
-      >
-        <div>
-          <span
-            class="
-              px-4
-              py-2
-              rounded-lg
-              inline-block
-              border border-gray-300
-              text-gray-600
-            "
-            >${data.message}</span
-          >
+        <img
+          src="assets/default-user.png"
+          alt="My profile"
+          class="w-6 h-6 rounded-full order-2"
+        />
+      </div>`
+        boxChat.innerHTML += MyChat
+      }else{
+        const messfriend = `  <div class="flex items-end">
+        <div class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
+          <div>
+            <span
+              class="px-4 py-2 rounded-lg inline-block rounded-bl-none border border-gray-300 text-gray-600">
+                ${data.message}
+                </span>
+          </div>
         </div>
-  
-  
-      </div>
-      <img
-        src="https://picsum.photos/200"
-        alt="My profile"
-        class="w-6 h-6 rounded-full order-1"
-      />
-    </div>`
-    boxChat.innerHTML += friendChat
-    }
+        <img src="https://picsum.photos/200" alt="My profile" class="w-6 h-6 rounded-full order-1">
+      </div>`
+      boxChat.innerHTML += messfriend
+      }
+    
+    
     })
-  }
+  }  
+  
 }
